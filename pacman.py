@@ -2,7 +2,6 @@ import pygame
 import random
 from abc import ABCMeta, abstractmethod
 
-
 AMARELO = (255,255,0)
 PRETO = (0,0,0)
 AZUL = (0,0,255)
@@ -71,6 +70,7 @@ class Cenario(ElementoJogo):
         self.tamanho = tamanho
         self.estado = 0
         #Estados: 0 - JOGANDO | 1 - PAUSADO | 2 - GAMEOVER | 3 - GANHOU
+        self.vidas = 5
         self.pontos = 0
 
         self.matriz = [
@@ -109,10 +109,12 @@ class Cenario(ElementoJogo):
         self.moviveis.append(obj)
 
 
-    def pintar_pontos(self, tela):
+    def pintar_score(self, tela):
         pontos_x = 30 * self.tamanho
-        img_pontos = fonte.render("Score: {}".format(self.pontos), True, AMARELO)
-        tela.blit(img_pontos, (pontos_x, 50))
+        pontos_img = fonte.render("Score: {}".format(self.pontos), True, AMARELO)
+        tela.blit(pontos_img, (pontos_x, 50))
+        vidas_img =  fonte.render("Vidas: {}".format(self.vidas), True, AMARELO)
+        tela.blit(vidas_img, (pontos_x, 100))
 
 
     def pintar_linha(self, tela, numero_linha, linha):
@@ -157,7 +159,7 @@ class Cenario(ElementoJogo):
     def pintar_jogando(self, tela):
         for numero_linha, linha in enumerate(self.matriz):
             self.pintar_linha(tela, numero_linha, linha)
-        self.pintar_pontos(tela)
+        self.pintar_score(tela)
 
     def pintar_gameover(self, tela):
         self.pintar_texto_centro(tela, "G A M E   O V E R")
@@ -202,7 +204,13 @@ class Cenario(ElementoJogo):
             if len(direcoes) >= 3:
                 movivel.esquina(direcoes)
             if isinstance(movivel, Fantasma) and movivel.linha == self.pacman.linha and movivel.coluna == self.pacman.coluna:
-                self.estado = 2
+                self.vidas -= 1
+                if self.vidas <=0:
+                    self.estado = 2
+                else:
+                    self.pacman.linha = 1
+                    self.pacman.coluna = 1
+
             else:
                 if 0 <= col_intencao <28 and 0 <= lin_intencao < 29 and self.matriz[lin_intencao][col_intencao] != 2:
                     movivel.aceitar_movimento()
