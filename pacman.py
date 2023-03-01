@@ -1,6 +1,7 @@
 import pygame
 import random
 from abc import ABCMeta, abstractmethod
+from pygame import mixer 
 
 AMARELO = (255,255,0)
 PRETO = (0,0,0)
@@ -23,7 +24,15 @@ ESQUERDA = 4
 pygame.init()
 
 screen = pygame.display.set_mode((800,600),0)
+pygame.display.set_caption('P A C M A N - DOUGLAS AMARAL')
+img = pygame.image.load('pacman.png')
+pygame.display.set_icon(img)
 fonte = pygame.font.SysFont("arial", 24, True, False)
+pygame.mixer.pre_init(44100, -16, 1, 512)
+mixer.init()
+mixer.music.load("pacman_chomp.wav") 
+#mixer.music.load("pacman_death.wav") 
+mixer.music.set_volume(0.7)
 
 #classe para desenhar o cenario
 
@@ -203,6 +212,8 @@ class Cenario(ElementoJogo):
             direcoes = self.get_direcoes(lin, col)
             if len(direcoes) >= 3:
                 movivel.esquina(direcoes)
+                if isinstance(movivel, Pacman):
+                    mixer.music.play()                
             if isinstance(movivel, Fantasma) and movivel.linha == self.pacman.linha and movivel.coluna == self.pacman.coluna:
                 self.vidas -= 1
                 if self.vidas <=0:
@@ -214,6 +225,7 @@ class Cenario(ElementoJogo):
             else:
                 if 0 <= col_intencao <28 and 0 <= lin_intencao < 29 and self.matriz[lin_intencao][col_intencao] != 2:
                     movivel.aceitar_movimento()
+
                     if isinstance(movivel, Pacman) and self.matriz[lin][col] == 1:
                         self.pontos += 1
                         self.matriz[lin][col] = 0
