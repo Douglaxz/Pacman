@@ -1,6 +1,6 @@
  # PACMAN - JOGO
 
- ## :computer: Descrição do projeto: PACMAN
+ ## :computer: Descrição do projeto:
  Este projeto visa contemplar o jogo pacman
 
 ## :video_camera: Amostra do projeto:
