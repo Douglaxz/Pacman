@@ -20,7 +20,7 @@ Para começar, verifique a instalação dos seguintes itens:
 | Componente    | Site                                          | Download / intalação                    |
 | ------------- | ----------------------------------------------|-----------------------------------------|
 | Python        | https://python.org.br/                        |https://www.python.org/downloads/        |
-| Pygame         | https://flask.palletsprojects.com/en/2.2.x/   |pip install flask                        |
+| Pygame        |https://www.pygame.org/                        |python -m pip install -U pygame==2.2.0 --user
 
 ## :hammer_and_wrench: Construído com:
 - VsCode
