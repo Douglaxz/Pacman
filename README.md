@@ -1,6 +1,6 @@
  # PACMAN - JOGO
 
- ## :computer: Descrição do projeto: Gerenciador de quiz e pesquisas - QuizCreator
+ ## :computer: Descrição do projeto: PACMAN
  Este projeto visa contemplar o jogo pacman
 
 ## :video_camera: Amostra do projeto:
