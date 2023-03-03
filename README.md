@@ -1,7 +1,7 @@
  # PACMAN - JOGO
 
  ## :computer: Descrição do projeto:
- Este projeto visa contemplar o jogo pacman
+ Este projeto visa contemplar o jogo pacman em python/pygame
 
 ## :video_camera: Amostra do projeto:
 em desenvolvimento
